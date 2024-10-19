@@ -1,5 +1,7 @@
 # mingyuan.py
 
+from swarm import Result
+
 def fixed_height_buy_width(width_m, height_m, curtain_type):
     # 原始计算逻辑
     pleat_base = (width_m * 2) / 0.25
@@ -45,4 +47,9 @@ def calculate_fabric_cost(width_m, height_m, curtain_type):
         main_fabric_quantity = fixed_height_buy_width(width_m, height_m, curtain_type)
 
     cost = main_fabric_quantity * UNIT_PRICE
-    return cost
+    # 使用 Result 返回成本和布料数量，同时返回代理
+    return Result(
+        value={"cost": cost, "main_fabric_quantity": main_fabric_quantity}, 
+        agent="agent-b",  
+        context_variables={}  
+    )

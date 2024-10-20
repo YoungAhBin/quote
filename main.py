@@ -1,3 +1,10 @@
+import os
+import openai
+import json
+
+# 设置 OpenAI API 密钥
+openai.api_key = os.environ.get("OPENAI_API_KEY")
+
 import streamlit as st
 from swarm import Swarm
 from agents.fabric_agent import fabric_agent

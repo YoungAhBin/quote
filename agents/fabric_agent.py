@@ -1,6 +1,7 @@
 # 创建布料代理
 import importlib
 from swarm import Agent
+from swarm.core import Result
 
 def calculate_fabric_cost_agent(width: int, height: int, curtain_type: str = '纱帘', manufacturer: str = None, context_variables: dict = None):
     """

@@ -2,7 +2,6 @@
 import importlib
 from swarm import Agent
 from swarm.core import Result
-import json
 
 def calculate_fabric_cost_agent(width: int, height: int, curtain_type: str = '纱帘', manufacturer: str = None, context_variables: dict = None):
     """
@@ -54,7 +53,7 @@ def calculate_fabric_cost_agent(width: int, height: int, curtain_type: str = '�
     else:
         # 如果厂家计算函数未返回 Result 对象，手动创建
         return Result(
-            value=json.dumps({"cost": result}),
+            value=result,
             agent=None,
             context_variables={}
         )

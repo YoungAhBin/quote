@@ -53,7 +53,7 @@ def calculate_fabric_cost_agent(width: int, height: int, curtain_type: str = '�
     else:
         # 如果厂家计算函数未返回 Result 对象，手动创建
         return Result(
-            value={"cost": result},
+            value="{"cost": result}",
             agent=None,
             context_variables={}
         )

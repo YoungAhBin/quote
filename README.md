@@ -10,3 +10,4 @@ cd "C:\Users\传防科电脑\Desktop\swarm-main"
 pip install .
 cd "C:\Users\传防科电脑\Desktop\quote-main"
 streamlit run main.py
+deactivate

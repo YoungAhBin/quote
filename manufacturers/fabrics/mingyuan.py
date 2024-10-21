@@ -1,4 +1,5 @@
 # mingyuan.py
+from swarm.core import Result
 
 def fixed_height_buy_width(width_m, height_m, curtain_type):
     pleat_base = (width_m * 2) / 0.25

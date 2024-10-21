@@ -21,6 +21,7 @@ python -m venv venv
 
 # 激活虚拟环境（Windows 平台）
 venv\Scripts\activate
+```
 注释： 虚拟环境的作用是将项目所需的依赖与全局环境隔离开来，防止冲突。
 如果你使用的是其他操作系统，请根据操作系统的虚拟环境激活命令修改上述命令。
 
@@ -30,9 +31,10 @@ venv\Scripts\activate
 ```bash
 # 安装 Streamlit
 pip install streamlit
+```
 
 ### 4. 安装 Swarm 依赖模块
-项目使用了 Swarm 模块来进行某些核心功能的处理。需要切换到 Swarm 的目录并安装它：
+项目使用了 Swarm 模块来进行某些核心功能的处理。需要切换到 Swarm 的目录并安装它（需下载 Swarm 模块到本地进行安装）：
 
 ```bash
 # 进入 Swarm 模块目录
@@ -40,6 +42,7 @@ cd "C:\Users\传防科电脑\Desktop\swarm-main"
 
 # 安装 Swarm 模块
 pip install .
+```
 
 ### 5. 运行项目
 安装完所有依赖后，返回到 quote-main 目录并启动项目：
@@ -50,6 +53,7 @@ cd "C:\Users\传防科电脑\Desktop\quote-main"
 
 # 启动 Streamlit 应用
 streamlit run main.py
+```
 注释： 上述命令将会在本地启动一个 Streamlit 服务器，打开一个网页应用，你可以通过浏览器访问该应用。
 
 ### 6. 停止项目
@@ -58,4 +62,5 @@ streamlit run main.py
 ```bash
 # 停止虚拟环境
 deactivate
+```
 注释： deactivate 命令用于退出当前的虚拟环境。

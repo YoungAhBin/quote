@@ -48,7 +48,7 @@ def calculate_fabric_cost(width_m, height_m, curtain_type):
 
     # 返回成本和主布数量
     return Result(
-        value={"cost": cost, "main_fabric_quantity": main_fabric_quantity},
+        value="{"cost": cost, "main_fabric_quantity": main_fabric_quantity}",
         agent=None,
         context_variables={}
     )

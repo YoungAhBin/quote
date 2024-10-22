@@ -40,7 +40,7 @@ def calculate_fabric_cost_agent(width: int, height: int, curtain_type: str = '�
 
     try:
         # 调用厂家特定的计算函数，返回 Result 对象
-        result = manufacturer_module.calculate_fabric_cost(width_m, height_m, curtain_type)
+        result = manufacturer_module.calculate_fabric_cost(width_m, height_m, curtain_type, fabric_model)
     except AttributeError:
         return Result(
             value={"error": f"厂家 '{manufacturer}' 的模块中缺少 'calculate_fabric_cost' 函数。"},

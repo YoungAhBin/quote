@@ -13,7 +13,7 @@ client = Swarm()
 
 st.title("布料成本计算器")
 
-user_input = st.text_area("请输入您的请求："宽: 6800, 高: 2700, 类型: 布帘, 厂家: mingyuan, 面料型号: 186A素色布 "")
+user_input = st.text_area("请输入您的请求：宽: 6800, 高: 2700, 类型: 布帘, 厂家: mingyuan, 面料型号: 186A素色布 ")
 
 if st.button("提交"):
     response = client.run(

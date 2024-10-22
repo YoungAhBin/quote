@@ -1,3 +1,4 @@
 streamlit
 swarm
 openai
+sqlite3

@@ -67,6 +67,7 @@ fabric_agent = Agent(
 - 窗帘的高度（height），单位为毫米。
 - 窗帘的类型（curtain_type），例如 '纱帘'、'遮光帘' 等。
 - 厂家名称（manufacturer），例如 'mingyuan'。
+- 面料型号（fabric_model），例如 '186A素色布'、'色织提花布' 等。
 
 请确保准确提取上述参数，并调用相应的函数进行计算。
 """,

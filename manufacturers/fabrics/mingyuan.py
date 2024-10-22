@@ -31,9 +31,15 @@ def fixed_width_buy_height(width_m, height_m, curtain_type):
 
     return main_fabric_quantity
 
-def calculate_fabric_cost(width_m, height_m, curtain_type):
+def calculate_fabric_cost(width_m, height_m, curtain_type, fabric_model):
     """
     计算布料成本，根据高度选择相应的计算方法。
+
+    Args:
+        width_m (float): 窗帘的宽度（米）。
+        height_m (float): 窗帘的高度（米）。
+        curtain_type (str): 窗帘的类型，比如 "纱帘"。
+        fabric_model (str): 面料型号，用于查询面料价格。
 
     Returns:
         Result: 包含成本和主布数量的 Result 对象。

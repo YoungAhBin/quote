@@ -3,7 +3,7 @@ import importlib
 from swarm import Agent
 from swarm.core import Result
 
-def calculate_fabric_cost_agent(width: int, height: int, curtain_type: str = '纱帘', manufacturer: str = None, context_variables: dict = None):
+def calculate_fabric_cost_agent(width: int, height: int, curtain_type: str = '纱帘', manufacturer: str = None, fabric_model: str = None, context_variables: dict = None):
     """
     计算窗帘的布料成本，动态调用厂家计算公式，并返回多个值。
 
@@ -12,6 +12,7 @@ def calculate_fabric_cost_agent(width: int, height: int, curtain_type: str = '�
         height (int): 窗帘的高度，单位为毫米。
         curtain_type (str, optional): 窗帘类型，例如 '纱帘'、'遮光帘' 等，默认为 '纱帘'。
         manufacturer (str, optional): 厂家名称，用于动态加载计算公式。
+        fabric_model (str, optional): 面料型号，用于动态获取面料价格。
         context_variables (dict, optional): 上下文变量。
 
     Returns:

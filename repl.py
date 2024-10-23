@@ -8,14 +8,30 @@ def process_and_print_streaming_response(response_stream, update_callback=None):
     content = ""
     last_sender = ""
     assistant_message = ""
+    response = None
 
     for chunk in response_stream:
         if "sender" in chunk:
             last_sender = chunk["sender"]
 
+        # 检查函数调用
+        if "function_call" in chunk and chunk["function_call"] is not None:
+            f = chunk["function_call"]
+            name = f["name"]
+            if not name:
+                continue
+            # 显示函数调用
+            function_call_message = f"**{last_sender}:** `{name}()`"
+            if update_callback:
+                update_callback(function_call_message)
+            else:
+                st.markdown(function_call_message)
+            continue  # 跳过本次循环的剩余部分
+
+        # 处理正常的内容
         if "content" in chunk and chunk["content"] is not None:
             if not content and last_sender:
-                assistant_message += f"**{last_sender}:** "
+                assistant_message = f"**{last_sender}:** "
             assistant_message += chunk["content"]
             content += chunk["content"]
             if update_callback:
@@ -27,16 +43,21 @@ def process_and_print_streaming_response(response_stream, update_callback=None):
             assistant_message = ""
 
         if "response" in chunk:
-            return chunk["response"]
+            response = chunk["response"]
 
-def pretty_print_messages(messages) -> None:
-    for message in messages:
-        if message["role"] != "assistant":
-            continue
+    return response
 
-        # 显示 agent 名称
-        sender = message.get('sender', 'AI')
-        st.markdown(f"**{sender}:** {message['content']}")
+def display_conversation():
+    for message in st.session_state['messages']:
+        role = "用户" if message['role'] == 'user' else message.get('sender', 'AI')
+        content = message.get('content', '')
+
+        # 检查函数调用
+        if 'function_call' in message:
+            function_name = message['function_call']['name']
+            st.markdown(f"**{role}**: `{function_name}()`")
+        else:
+            st.markdown(f"**{role}**: {content}")
 
 def run_streamlit_conversation(
     starting_agent, context_variables=None, stream=False, debug=False

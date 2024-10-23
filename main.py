@@ -1,25 +1,21 @@
+# main.py
+
 import os
 import openai
-import json
 
 # 设置 OpenAI API 密钥
 openai.api_key = os.environ.get("OPENAI_API_KEY")
 
 import streamlit as st
-from swarm import Swarm
-from agents.triage_agent import triage_agent
+from repl import run_streamlit_conversation  # 导入 repl.py 中的函数
+from agents.triage_agent import triage_agent  # 确保正确导入
 
-client = Swarm()
+# 主程序
+st.title("智能成本计算器")
 
-st.title("布料成本计算器")
-
-user_input = st.text_area("请输入您的请求：宽: 6800, 高: 2700, 类型: 布帘, 厂家: mingyuan, 面料型号: 186A素色布 ")
-
-if st.button("提交"):
-    response = client.run(
-        agent=fabric_agent,
-        messages=[{"role": "user", "content": user_input}],
-    )
-    ai_reply = response.messages[-1]["content"]
-    st.write("**AI 回复：**")
-    st.write(ai_reply)
+run_streamlit_conversation(
+    starting_agent=triage_agent,
+    context_variables=None,
+    stream=True,
+    debug=False
+)

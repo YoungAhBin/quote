@@ -19,13 +19,7 @@ def transfer_to_installation():
 
 triage_agent = Agent(
     name="分流代理",
-    instructions="""
-您是一个智能分流代理，负责根据用户的请求将其转交给最合适的代理进行处理。
-
-- 如果用户请求的是关于布料成本的计算，请将其转交给面料计算代理。
-- 如果用户请求的是关于轨道成本的计算，请将其转交给轨道计算代理。
-- 如果用户请求的是关于安装人工成本的计算，请将其转交给安装工人代理。
-""",
+    instructions="Determine which agent is best suited to handle the user's request, and transfer the conversation to that agent.",
     functions=[transfer_to_fabric, transfer_to_rail, transfer_to_installation],
 )
 

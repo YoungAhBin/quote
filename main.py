@@ -7,12 +7,7 @@ import openai
 openai.api_key = os.environ.get("OPENAI_API_KEY")
 
 from swarm.repl import run_demo_loop
-import streamlit as st
-from repl import run_streamlit_conversation  # 导入 repl.py 中的函数
 from agents.triage_agent import triage_agent  # 确保正确导入
-
-# 主程序
-st.title("智能成本计算器")
 
 run_demo_loop(
     starting_agent=triage_agent,

@@ -46,37 +46,58 @@ def run_streamlit_conversation(
         st.session_state['messages'] = []
     if 'agent' not in st.session_state:
         st.session_state['agent'] = starting_agent
+    if 'user_input' not in st.session_state:
+        st.session_state['user_input'] = ''
+
+    # 定义提交按钮的回调函数
+    def submit():
+        user_input = st.session_state['user_input']
+        if user_input.strip():
+            # 将用户输入添加到对话历史
+            st.session_state['messages'].append({"role": "user", "content": user_input})
+
+            # 创建一个占位符用于流式输出
+            ai_response_placeholder = st.empty()
+
+            # 定义更新回调函数
+            def update_ai_reply(content):
+                ai_response_placeholder.markdown(content)
+
+            # 运行客户端，启用流式输出
+            response_stream = client.run(
+                agent=st.session_state['agent'],
+                messages=st.session_state['messages'],
+                context_variables=context_variables or {},
+                stream=stream,
+                debug=debug,
+            )
+
+            # 处理并显示流式响应
+            response = process_and_print_streaming_response(response_stream, update_ai_reply)
+
+            # 更新对话历史和 Agent
+            st.session_state['messages'].extend(response.messages)
+            st.session_state['agent'] = response.agent
+
+            # 清空输入框
+            st.session_state['user_input'] = ''
+
+    # 定义清除对话的回调函数
+    def clear_conversation():
+        st.session_state['messages'] = []
+        st.session_state['agent'] = starting_agent
+        st.session_state['user_input'] = ''
+        st.experimental_rerun()
 
     # 输入框在顶部
-    user_input = st.text_input("请输入您的请求：", key='user_input')
+    st.text_input("请输入您的请求：", key='user_input')
 
-    if st.button("提交") and user_input.strip():
-        # 将用户输入添加到对话历史
-        st.session_state['messages'].append({"role": "user", "content": user_input})
-        st.session_state['user_input'] = ''  # 清空输入框
-
-        # 创建一个占位符用于流式输出
-        ai_response_placeholder = st.empty()
-
-        # 定义更新回调函数
-        def update_ai_reply(content):
-            ai_response_placeholder.markdown(content)
-
-        # 运行客户端，启用流式输出
-        response_stream = client.run(
-            agent=st.session_state['agent'],
-            messages=st.session_state['messages'],
-            context_variables=context_variables or {},
-            stream=stream,
-            debug=debug,
-        )
-
-        # 处理并显示流式响应
-        response = process_and_print_streaming_response(response_stream, update_ai_reply)
-
-        # 更新对话历史和 Agent
-        st.session_state['messages'].extend(response.messages)
-        st.session_state['agent'] = response.agent
+    # 创建按钮，并指定回调函数
+    col1, col2 = st.columns([1, 1])
+    with col1:
+        st.button("提交", on_click=submit)
+    with col2:
+        st.button("清除对话", on_click=clear_conversation)
 
     # 显示新的对话（最新的 AI 回复）
     if st.session_state['messages']:
@@ -92,7 +113,3 @@ def run_streamlit_conversation(
         for message in st.session_state['messages'][:-1]:
             role = "用户" if message['role'] == 'user' else message.get('sender', 'AI')
             st.markdown(f"**{role}：** {message['content']}")
-
-    if st.button("清除对话"):
-        st.session_state['messages'] = []
-        st.experimental_rerun()

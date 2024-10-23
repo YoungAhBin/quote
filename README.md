@@ -52,7 +52,7 @@ pip install .
 cd "C:\Users\传防科电脑\Desktop\quote-main"
 
 # 启动应用
-run main.py
+python main.py
 ```
 注释： 上述命令将会在本地启动一个 Streamlit 服务器，打开一个网页应用，你可以通过浏览器访问该应用。
 

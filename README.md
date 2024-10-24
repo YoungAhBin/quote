@@ -26,11 +26,11 @@ venv\Scripts\activate
 如果你使用的是其他操作系统，请根据操作系统的虚拟环境激活命令修改上述命令。
 
 ### 3. 安装依赖
-项目依赖 Streamlit 进行网页展示，安装所需的依赖：
+项目依赖 reflex 进行网页展示，安装所需的依赖：
 
 ```bash
-# 安装 Streamlit
-pip install streamlit
+# 安装 reflex
+pip install reflex
 ```
 
 ### 4. 安装 Swarm 依赖模块

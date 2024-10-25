@@ -20,7 +20,7 @@ class TerminalApp:
         self.root.title("AI Quote Terminal")
 
         # 创建用于显示输出的滚动文本区域
-        self.text_area = scrolledtext.ScrolledText(self.root, height=20, width=80)
+        self.text_area = scrolledtext.ScrolledText(self.root, height=50, width=160)
         self.text_area.pack(pady=10)
         self.text_area.configure(state='disabled')
 
@@ -31,7 +31,7 @@ class TerminalApp:
         self.text_area.tag_configure('bold', font=('Helvetica', 10, 'bold'))
 
         # 创建用于输入命令的输入框
-        self.entry = tk.Entry(self.root, width=80)
+        self.entry = tk.Entry(self.root, width=160)
         self.entry.pack(pady=10)
         self.entry.bind("<Return>", self.run_command)  # 绑定回车键事件
 

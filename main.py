@@ -1,7 +1,7 @@
 # main.py
 
 import tkinter as tk
-from terminal_app import TerminalApp
+from repl_terminal_app.terminal_app import TerminalApp
 
 if __name__ == "__main__":
     root = tk.Tk()

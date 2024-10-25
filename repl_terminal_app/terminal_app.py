@@ -6,7 +6,6 @@ from swarm import Swarm
 from agents.triage_agent import triage_agent  # 请根据实际路径导入
 
 from repl_terminal_app.repl import process_and_print_streaming_response  # 导入库函数
-# 如果 format_arguments 在 repl.py 中定义，也需要导入
 from repl_terminal_app.repl import format_arguments
 
 import os

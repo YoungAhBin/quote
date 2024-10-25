@@ -1,15 +1,16 @@
-import os
 import threading
 import tkinter as tk
 from tkinter import scrolledtext
-import openai
 
 from swarm import Swarm
 from agents.triage_agent import triage_agent  # 请根据实际路径导入
 
-from repl import process_and_print_streaming_response  # 导入库函数
+from repl_terminal_app.repl import process_and_print_streaming_response  # 导入库函数
 # 如果 format_arguments 在 repl.py 中定义，也需要导入
-from repl import format_arguments
+from repl_terminal_app.repl import format_arguments
+
+import os
+import openai
 
 # 设置 OpenAI API 密钥
 openai.api_key = os.environ.get("OPENAI_API_KEY")
@@ -80,8 +81,3 @@ class TerminalApp:
         self.text_area.insert(tk.END, text, tags)
         self.text_area.configure(state='disabled')
         self.text_area.see(tk.END)
-
-if __name__ == "__main__":
-    root = tk.Tk()
-    app = TerminalApp(root)
-    root.mainloop()

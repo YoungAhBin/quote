@@ -1,17 +1,9 @@
 # main.py
 
-import os
-import openai
+import tkinter as tk
+from terminal_app import TerminalApp
 
-# 设置 OpenAI API 密钥
-openai.api_key = os.environ.get("OPENAI_API_KEY")
-
-from swarm.repl import run_demo_loop
-from agents.triage_agent import triage_agent  # 确保正确导入
-
-run_demo_loop(
-    starting_agent=triage_agent,
-    context_variables=None,
-    stream=True,
-    debug=False
-)
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = TerminalApp(root)
+    root.mainloop()

@@ -97,7 +97,49 @@ class MyWidget(QtWidgets.QWidget):
         # 设置风格与线宽
         ribbon.setFrameStyle(QtWidgets.QFrame.Shape.StyledPanel | QtWidgets.QFrame.Shadow.Sunken)
         ribbon.setLineWidth(3)
-   
+
+    def send_message(self):
+        user_input = self.pte.toPlainText().strip()
+        if not user_input:
+            return
+
+        # 显示用户输入到 QTextBrowser
+        self.text_browser.append(f'<span style="color: green; font-weight: bold;">用户:</span> {user_input}<br>')
+
+        # 清空输入框
+        self.pte.clear()
+
+        # 如果有现存的线程在运行，先终止它
+        if self.backend_thread and self.backend_thread.isRunning():
+            self.backend_thread.terminate()
+            self.backend_thread.wait()
+
+        # 创建并启动新的后台线程
+        self.backend_thread = BackendThread(
+            user_input=user_input,
+            starting_agent=self.starting_agent,
+            context_variables=None,  # 根据需要传递上下文变量
+            stream=False,            # 根据需要设置是否流式
+            debug=False              # 根据需要设置调试模式
+        )
+
+        # 连接信号
+        self.backend_thread.response_chunk.connect(self.update_text_browser)
+
+        # 启动线程
+        self.backend_thread.start()
+
+    @Slot(str)
+    def update_text_browser(self, text):
+        self.text_browser.append(text)
+
+    def closeEvent(self, event):
+        # 确保线程在关闭时正确终止
+        if self.backend_thread and self.backend_thread.isRunning():
+            self.backend_thread.terminate()
+            self.backend_thread.wait()
+        event.accept()
+
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     window = MyWidget()

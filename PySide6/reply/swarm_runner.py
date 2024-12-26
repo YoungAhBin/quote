@@ -102,3 +102,12 @@ class BackendThread(QThread):
     
             messages.extend(response.messages)
             agent = response.agent
+
+    def run(self):
+        self.run_demo_loop(
+            self.user_input,
+            self.starting_agent,
+            self.context_variables,
+            self.stream,
+            self.debug
+        )

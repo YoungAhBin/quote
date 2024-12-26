@@ -5,6 +5,12 @@ from PySide6.QtCore import Qt
 
 from PySide6.Media_player import MediaPlayerWidget
 
+import os
+import openai
+
+# 设置 OpenAI API 密钥
+openai.api_key = os.environ.get("OPENAI_API_KEY")
+
 class MyWidget(QtWidgets.QWidget):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

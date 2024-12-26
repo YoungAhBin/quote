@@ -123,9 +123,9 @@ class MyWidget(QtWidgets.QWidget):
         # 创建并启动新的后台线程
         self.backend_thread = BackendThread(
             user_input=user_input,
-            starting_agent=self.starting_agent,
+            starting_agent=triage_agent,
             context_variables=None,  # 根据需要传递上下文变量
-            stream=False,            # 根据需要设置是否流式
+            stream=True,            # 根据需要设置是否流式
             debug=False              # 根据需要设置调试模式
         )
 

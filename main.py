@@ -1,9 +1,14 @@
 # main.py
 
-import tkinter as tk
-from repl_terminal_app.terminal_app import TerminalApp
+import sys
+from PySide6 import QtWidgets
+from Main_interface import MyWidget 
+
+def main():
+    app = QtWidgets.QApplication(sys.argv)
+    window = MyWidget()
+    window.show()
+    sys.exit(app.exec())
 
 if __name__ == "__main__":
-    root = tk.Tk()
-    app = TerminalApp(root)
-    root.mainloop()
+    main()

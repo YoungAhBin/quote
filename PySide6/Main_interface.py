@@ -3,6 +3,7 @@ import sys
 from PySide6 import  QtGui,QtWidgets
 from PySide6.QtCore import Qt
 
+from Media_player import MediaPlayerWidget
 
 class MyWidget(QtWidgets.QWidget):
     def __init__(self, *args, **kwargs):
